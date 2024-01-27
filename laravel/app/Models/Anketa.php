@@ -15,4 +15,8 @@ class Anketa extends Model
         'datum_kraja',
         'status',
     ];
+    public function odgovori()
+    {
+        return $this->hasMany(OdgovorAnkete::class, 'anketa_id');
+    }
 }

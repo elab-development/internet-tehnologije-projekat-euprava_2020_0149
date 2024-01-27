@@ -14,4 +14,8 @@ class ZdravstveniKarton extends Model
         'alergije',
         'prethodni_pregledi',
     ];
+    public function korisnik()
+    {
+        return $this->belongsTo(User::class, 'korisnik_id');
+    }
 }

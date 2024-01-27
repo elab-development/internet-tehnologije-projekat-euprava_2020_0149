@@ -16,4 +16,10 @@ class Zahtev extends Model
         'datum_podnosenja',
         'odgovor',
     ];
+
+    public function korisnik()
+    {
+        return $this->belongsTo(User::class, 'korisnik_id');
+    }
+
 }

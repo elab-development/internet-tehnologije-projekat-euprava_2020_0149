@@ -15,4 +15,8 @@ class Zakazivanje extends Model
         'status',
         'napomena',
     ];
+    public function korisnik()
+    {
+        return $this->belongsTo(User::class, 'korisnik_id');
+    }
 }
