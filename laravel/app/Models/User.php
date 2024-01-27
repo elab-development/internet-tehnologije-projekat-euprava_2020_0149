@@ -59,11 +59,11 @@ class User extends Authenticatable
     }
     public function zdravstveniKarton()
     {
-        return $this->hasOne(ZdravstveniKarton::class, 'korisnik_id');
+        return $this->hasOne(ZdravstveniKarton::class, 'korisnik_id'); ////hasOne se koristi u modelu koji ima strani ključ. Ova veza označava da model "ima jedan" drugi model.
     }
     public function zahtevi()
     {
-        return $this->hasMany(Zahtev::class, 'korisnik_id');
+        return $this->hasMany(Zahtev::class, 'korisnik_id'); 
     }
     public function odgovoriNaAnkete()
     {

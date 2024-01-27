@@ -16,6 +16,6 @@ class ZdravstveniKarton extends Model
     ];
     public function korisnik()
     {
-        return $this->belongsTo(User::class, 'korisnik_id');
+        return $this->belongsTo(User::class, 'korisnik_id');  // belongsTo se koristi u modelu koji sadrži strani ključ ka drugom modelu. Ova veza označava da model "pripada" drugom modelu.
     }
 }
