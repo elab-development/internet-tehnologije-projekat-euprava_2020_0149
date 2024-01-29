@@ -33,6 +33,7 @@ class User extends Authenticatable
         'uloga',
         'slika_profila',
         'poslednje_prijavljivanje',
+        'role' //admin ili korisnik ili neulogovani
     ];
 
     /**

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->enum('uloga', ['korisnik', 'admin', 'moderator'])->nullable();
             $table->string('slika_profila')->nullable();
             $table->dateTime('poslednje_prijavljivanje')->nullable();
+            $table->string('role')->default('korisnik');
         });
     }
 
