@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnketaController;
 use App\Http\Controllers\ZahtevController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('zahtevi', ZahtevController::class);
+Route::resource('ankete', AnketaController::class);
+
+
+
+
+
+
