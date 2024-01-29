@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::get('/zakazivanja/search', [ZakazivanjeController::class, 'search']);
 Route::resource('zahtevi', ZahtevController::class);
 Route::resource('ankete', AnketaController::class);
 Route::resource('zakazivanja', ZakazivanjeController::class);

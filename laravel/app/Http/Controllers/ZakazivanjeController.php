@@ -64,4 +64,36 @@ class ZakazivanjeController extends Controller
         $zakazivanje->delete();
         return response()->json(null, 204);
     }
+
+
+    public function search(Request $request)
+    {
+        
+        $query = Zakazivanje::query();
+
+        if ($request->has('korisnik_id')) {
+            $query->where('korisnik_id', $request->input('korisnik_id'));
+        }
+
+        if ($request->has('datum_vreme')) {
+            $query->where('datum_vreme', $request->input('datum_vreme'));
+        }
+
+        if ($request->has('tip_pregleda')) {
+            $query->where('tip_pregleda', $request->input('tip_pregleda'));
+        }
+
+        if ($request->has('status')) {
+            $query->where('status', $request->input('status'));
+        }
+
+        if ($request->has('napomena')) {
+            $query->where('napomena', 'like', '%' . $request->input('napomena') . '%');
+        }
+
+    
+        $zakazivanja = $query->get();
+        return response()->json($zakazivanja);
+    }
+
 }
