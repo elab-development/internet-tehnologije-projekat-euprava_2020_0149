@@ -64,4 +64,14 @@ class AnketaController extends Controller
         $anketa->delete();
         return response()->json(null, 204);
     }
+
+    public function getAnketaWithPitanjaIOdgovori($id)
+    {
+        // Pronađi anketu sa datim ID-om i učitaj pitanja i odgovore
+        $anketa = Anketa::with(['pitanja', 'pitanja.odgovori'])
+            ->findOrFail($id);
+
+        return response()->json($anketa);
+    }
+
 }

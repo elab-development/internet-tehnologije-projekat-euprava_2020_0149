@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('odgovori_anketas', function (Blueprint $table) {
+        Schema::table('odgovor_anketes', function (Blueprint $table) {
             $table->foreign('anketa_id')->references('id')->on('anketas');
             $table->foreign('korisnik_id')->references('id')->on('users');
-            $table->foreign('pitanje_id')->references('id')->on('pitanje_anketes');
+            $table->foreign('pitanje_ankete_id')->references('id')->on('pitanje_anketes');
         });
     }
 
@@ -27,7 +27,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('odgovori_anketas', function (Blueprint $table) {
+        Schema::table('odgovor_anketes', function (Blueprint $table) {
             $table->dropForeign(['anketa_id']);
             $table->dropForeign(['korisnik_id']);
         });

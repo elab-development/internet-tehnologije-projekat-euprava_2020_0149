@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('odgovori_anketas', function (Blueprint $table) {
+        Schema::create('odgovor_anketes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('anketa_id');
             $table->unsignedBigInteger('korisnik_id');
-            $table->unsignedBigInteger('pitanje_id');
+            $table->unsignedBigInteger('pitanje_ankete_id');
             $table->text('odgovor');
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('odgovori_anketas');
+        Schema::dropIfExists('odgovor_anketes');
     }
 };

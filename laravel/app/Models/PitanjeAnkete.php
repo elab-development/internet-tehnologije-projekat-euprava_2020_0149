@@ -17,4 +17,8 @@ class PitanjeAnkete extends Model  //svaka anketa ce imati vise pitanja
     {
         return $this->belongsTo(Anketa::class, 'anketa_id');
     }
+    public function odgovori()
+    {
+        return $this->hasMany(OdgovorAnkete::class );
+    }
 }
