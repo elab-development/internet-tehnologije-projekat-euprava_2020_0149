@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnketaController;
+use App\Http\Controllers\OdgovorAnketeController;
 use App\Http\Controllers\ZahtevController;
 use App\Http\Controllers\ZakazivanjeController;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ Route::resource('zahtevi', ZahtevController::class);
 Route::resource('ankete', AnketaController::class);
 Route::resource('zakazivanja', ZakazivanjeController::class);
 
+Route::resource('odgovori', OdgovorAnketeController::class);
 
 
 
