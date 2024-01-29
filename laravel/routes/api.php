@@ -34,12 +34,18 @@ Route::resource('odgovori', OdgovorAnketeController::class);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    // Dodajte ovu rutu za dobijanje podataka o ulogovanom korisniku
+    Route::get('user-profile', [AuthController::class, 'userProfile']);
+    
+    Route::get('/admin', function () {
+        // Admin stranica
+    })->middleware('role:admin'); // Samo admini mogu pristupiti
+    
+    Route::get('/user', function () {
+        // Korisnička stranica
+    })->middleware('role:korisnik'); // Samo obični korisnici mogu pristupiti
+});
+
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
-
-Route::get('/admin', function () {
-    // Admin stranica
-})->middleware('role:admin'); // Samo admini mogu pristupiti
-
-Route::get('/user', function () {
-    // Korisnička stranica
-})->middleware('role:korisnik'); // Samo obični korisnici mogu pristupiti

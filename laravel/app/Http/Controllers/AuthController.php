@@ -94,4 +94,10 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Logged out']);
     }
+
+    public function userProfile(Request $request)
+{
+    $user = Auth::user(); // Dobijamo trenutno ulogovanog korisnika
+    return response()->json($user);
+}
 }
