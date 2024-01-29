@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnketaController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OdgovorAnketeController;
 use App\Http\Controllers\PitanjeAnketeController;
 use App\Http\Controllers\ZahtevController;
@@ -31,3 +32,6 @@ Route::resource('odgovori', OdgovorAnketeController::class);
 
 
 
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
