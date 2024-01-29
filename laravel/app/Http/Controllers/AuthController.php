@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -30,15 +31,18 @@ class AuthController extends Controller
             'broj_licne_karte' => 'required|string|max:255|unique:users,broj_licne_karte',
             'status' => 'required|string|max:255',
             'uloga' => 'required|string|max:255',
-            'slika_profila' => 'nullable|string|max:255',
+            'slika_profila' => 'nullable|image|max:2048',
             
         ]);
     
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-    
-        $user = \App\Models\User::create([
+        $pathSlike = null;
+        if ($request->hasFile('slika_profila')) {
+            $pathSlike = $request->file('slika_profila')->store('slike_profila', 'public');
+        }
+        $user =  User::create([
             'imePrezime' => $request->input('imePrezime'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
@@ -52,7 +56,7 @@ class AuthController extends Controller
             'broj_licne_karte' => $request->input('broj_licne_karte'),
             'status' => $request->input('status'),
             'uloga' => $request->input('uloga'),
-            'slika_profila' => $request->input('slika_profila'),
+            'slika_profila' => $pathSlike,
            
         ]);
     
