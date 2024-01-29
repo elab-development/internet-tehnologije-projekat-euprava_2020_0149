@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/ankete/export/{id}', [AnketaController::class, 'exportAnketaToCsv']);
 Route::get('/ankete/{id}/pitanjaodgovori', [AnketaController::class, 'getAnketaWithPitanjaIOdgovori']);
-
 Route::get('/zakazivanja/search', [ZakazivanjeController::class, 'search']);
 Route::resource('zahtevi', ZahtevController::class);
 Route::resource('ankete', AnketaController::class);
