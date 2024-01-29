@@ -19,4 +19,8 @@ class Anketa extends Model
     {
         return $this->hasMany(OdgovorAnkete::class, 'anketa_id');
     }
+    public function pitanja()
+    {
+        return $this->hasMany(PitanjeAnkete::class );
+    }
 }

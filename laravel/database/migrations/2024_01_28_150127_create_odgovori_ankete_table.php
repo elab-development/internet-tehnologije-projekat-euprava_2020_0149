@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('odgovori_anketas', function (Blueprint $table) {
-            $table->foreign('anketa_id')->references('id')->on('anketas');
-            $table->foreign('korisnik_id')->references('id')->on('users');
+        Schema::create('odgovori_anketas', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('anketa_id');
+            $table->unsignedBigInteger('korisnik_id');
+            $table->unsignedBigInteger('pitanje_id');
+            $table->text('odgovor');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('odgovori_anketas', function (Blueprint $table) {
-            $table->dropForeign(['anketa_id']);
-            $table->dropForeign(['korisnik_id']);
-        });
+        Schema::dropIfExists('odgovori_anketas');
     }
 };

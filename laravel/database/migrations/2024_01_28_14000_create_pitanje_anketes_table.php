@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('odgovori_anketas', function (Blueprint $table) {
+        Schema::create('pitanje_anketes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('anketa_id');
-            $table->unsignedBigInteger('korisnik_id');
-            $table->text('odgovor');
+            $table->foreignId('anketa_id')->constrained()->onDelete('cascade');
+            $table->text('tekst');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('odgovori_anketas');
+        Schema::dropIfExists('pitanje_anketes');
     }
 };

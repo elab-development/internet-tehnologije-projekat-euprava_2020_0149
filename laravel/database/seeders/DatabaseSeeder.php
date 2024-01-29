@@ -3,7 +3,13 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use AnketaSeeder;
+use App\Models\User;
+use App\Models\Zakazivanje;
+use Database\Seeders\AnketaSeeder as SeedersAnketaSeeder;
 use Illuminate\Database\Seeder;
+ 
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +20,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+         User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+         Zakazivanje::factory()->count(5)->create();
+         $this->call(ZdravstveniKartonSeeder::class);
+         $this->call(SeedersAnketaSeeder::class);
     }
 }
