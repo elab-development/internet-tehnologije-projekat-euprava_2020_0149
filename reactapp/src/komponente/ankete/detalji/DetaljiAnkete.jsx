@@ -33,8 +33,15 @@ const DetaljiAnkete = () => {
         <p>Status: {anketa.status}</p>
         <h3>Pitanja:</h3>
         <ul>
-          {anketa.pitanja.map(pitanje => (
-            <li key={pitanje.id}>{pitanje.tekst}</li>
+          {anketa.pitanja.map((pitanje) => (
+            <div key={pitanje.id}>
+              <li>{pitanje.tekst}</li>
+              <ul>
+                {pitanje.odgovori.map((odgovor) => (
+                  <li key={odgovor.id}>{odgovor.odgovor}</li>
+                ))}
+              </ul>
+            </div>
           ))}
         </ul>
       </div>
