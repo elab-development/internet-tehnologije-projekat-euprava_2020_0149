@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import InputField from '../reusable/InputField';
+  
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,15 +24,14 @@ const Login = () => {
     <div style={styles.container}>
       <form style={styles.form} onSubmit={handleSubmit}>
         <h2>Please Sign In</h2>
-        <input
-          style={styles.input}
+     
+        <InputField
           type="email"
           placeholder="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
-          style={styles.input}
+        <InputField
           type="password"
           placeholder="password"
           value={password}
@@ -42,37 +43,4 @@ const Login = () => {
   );
 };
 
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    background: 'linear-gradient(135deg, #e2dadb 25%, #dae2df 25%, #dae2df 50%, #a2a7a5 50%, #a2a7a5 75%, #6d696a 75%)',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '300px',
-    backgroundColor: '#ffffff',
-    padding: '20px',
-    borderRadius: '5px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  },
-  input: {
-    marginBottom: '10px',
-    padding: '10px',
-    border: '1px solid #ddd',
-    borderRadius: '4px',
-  },
-  button: {
-    padding: '10px',
-    border: 'none',
-    borderRadius: '4px',
-    backgroundColor: '#a2a7a5',
-    color: 'white',
-    cursor: 'pointer',
-  }
-};
-
-export default Login;
+// ...
