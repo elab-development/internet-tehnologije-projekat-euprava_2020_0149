@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import RedAnkete from '../reusable/RedAnkete';
 
 const TabelaAnketa = () => {
     let navigate = useNavigate();
@@ -36,22 +37,8 @@ const TabelaAnketa = () => {
         </thead>
         <tbody>
         {surveys.map(survey => (
-            <tr key={survey.id}>
-            <td style={styles.td}>{survey.id}</td>
-            <td style={styles.td}>{survey.naslov}</td>
-            <td style={styles.td}>{survey.opis}</td>
-            <td style={styles.td}>{survey.datum_pocetka}</td>
-            <td style={styles.td}>{survey.datum_kraja}</td>
-            <td style={styles.td}>
-                <span style={survey.status.toLowerCase() === 'otvoreno' ? styles.openStatus : styles.closedStatus}>
-                {survey.status}
-                </span>
-            </td>
-            <td style={styles.td}>
-                    <button onClick={() => navigate(`/anketa/${survey.id}`)}>Detalji</button>
-                </td>
-            </tr>
-        ))}
+              <RedAnkete key={survey.id} survey={survey} navigate={navigate} />
+            ))}
         </tbody>
 
         </table>
