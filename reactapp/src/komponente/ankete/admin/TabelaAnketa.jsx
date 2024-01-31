@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import RedAnkete from '../reusable/RedAnkete'; 
+import RedAnkete from '../../reusable/RedAnkete'; 
 import Modal from 'react-modal';
-import useSurveys from '../useSurveys';
+import useSurveys from '../../useSurveys';
 const TabelaAnketa = () => {
     let navigate = useNavigate();
   const {surveys,setSurveys} = useSurveys();

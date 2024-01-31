@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FDAKartica from './FDAKartica';
 import ReactPaginate from 'react-paginate';
+import './Pagination.css';
 const OpenFDAComponent = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,9 +55,10 @@ const OpenFDAComponent = () => {
             pageCount={pageCount}
             onPageChange={handlePageClick}
             containerClassName={"pagination"}
-            activeClassName={"active"}
+            activeClassName={"activePageItem"}
             pageLinkClassName={"pageItem"}
             />
+
 
     </div>
   );
@@ -71,30 +73,8 @@ const styles = {
       background: 'linear-gradient(135deg, #e2dadb 25%, #dae2df 25%, #dae2df 50%, #a2a7a5 50%, #a2a7a5 75%, #6d696a 75%)',
       padding: '20px 0'
     },
-    pagination: {
-        listStyle: 'none',
-        display: 'flex',
-        justifyContent: 'center',
-        padding: '0',
-      },
-      pageItem: {
-        margin: '0 5px',
-        border: '1px solid #dae2df',
-        borderRadius: '5px',
-        padding: '5px 10px',
-        cursor: 'pointer',
-        backgroundColor: '#f9f9f9',
-        '&:hover': {
-          backgroundColor: '#e2dadb',
-        },
-      },
-      active: {
-        backgroundColor: '#dae2df',
-        color: '#6d696a',
-        '&:hover': {
-          backgroundColor: '#dae2df',
-        },
-      },
+ 
+      
 
 };
 export default OpenFDAComponent;
