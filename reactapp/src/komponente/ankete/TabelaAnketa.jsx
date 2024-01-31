@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import RedAnkete from '../reusable/RedAnkete';
 import InputField from '../reusable/InputField';
 import Modal from 'react-modal';
+import useSurveys from '../useSurveys';
 const TabelaAnketa = () => {
     let navigate = useNavigate();
-  const [surveys, setSurveys] = useState([]);
+  const {surveys,setSurveys} = useSurveys();
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newSurvey, setNewSurvey] = useState({
