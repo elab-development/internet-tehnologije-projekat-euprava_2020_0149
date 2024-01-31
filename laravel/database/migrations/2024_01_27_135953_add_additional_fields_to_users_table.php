@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('JMBG')->nullable();
             $table->string('broj_licne_karte')->nullable();
             $table->enum('status', ['aktivan', 'neaktivan', 'suspendovan'])->nullable();
-            $table->enum('uloga', ['korisnik', 'admin', 'moderator'])->nullable();
+          //  $table->enum('uloga', ['korisnik', 'admin', 'moderator'])->nullable();
             $table->string('slika_profila')->nullable();
             $table->dateTime('poslednje_prijavljivanje')->nullable();
             $table->string('role')->default('korisnik');

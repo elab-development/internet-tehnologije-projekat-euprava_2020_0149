@@ -96,8 +96,8 @@ class AuthController extends Controller
     }
 
     public function userProfile(Request $request)
-{
-    $user = Auth::user(); // Dobijamo trenutno ulogovanog korisnika
-    return response()->json($user);
-}
+        {
+            $user = Auth::user(); // Dobijamo trenutno ulogovanog korisnika
+            return response()->json($user);
+        }
 }

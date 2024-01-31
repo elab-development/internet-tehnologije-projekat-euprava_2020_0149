@@ -22,13 +22,14 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/ankete/export/{id}', [AnketaController::class, 'exportAnketaToCsv']);
 Route::get('/ankete/{id}/pitanjaodgovori', [AnketaController::class, 'getAnketaWithPitanjaIOdgovori']);
-Route::get('/zakazivanja/search', [ZakazivanjeController::class, 'search']);
+Route::get('/zakazivanja/search', [ZakazivanjeController::class, 'search']);  /// GET http://127.0.0.1:8000/api/zakazivanja/search?korisnik_id=1&status=zakazano
+
+
 Route::resource('zahtevi', ZahtevController::class);
-Route::resource('ankete', AnketaController::class);
 Route::resource('zakazivanja', ZakazivanjeController::class);
 Route::resource('pitanja', PitanjeAnketeController::class);
 Route::resource('odgovori', OdgovorAnketeController::class);
-
+Route::resource('ankete', AnketaController::class);
 
 
 
@@ -41,6 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::get('/admin', function () {
         // Admin stranica
+        
     })->middleware('role:admin'); // Samo admini mogu pristupiti
     
     Route::get('/user', function () {
