@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 const TabelaAnketa = () => {
     let navigate = useNavigate();
   const [surveys, setSurveys] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newSurvey, setNewSurvey] = useState({
     naslov: 'novaanketa',
@@ -36,7 +37,9 @@ const TabelaAnketa = () => {
     }));
   };
   
-
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = sessionStorage.getItem('token');
@@ -52,8 +55,21 @@ const TabelaAnketa = () => {
       console.error('Error creating survey:', error);
     }
   };
+    const filteredSurveys = surveys.filter(survey =>
+      survey.naslov.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
   return (
     <div style={styles.container}>
+      <div style={styles.controlsContainer}>
+        <input
+          type="text"
+          placeholder="Pretraži ankete..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+          style={styles.searchInput}
+        />
+      </div>
        <button onClick={() => setIsModalOpen(true)}>Dodaj Novu Anketu</button>
        <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
         <form onSubmit={handleSubmit} style={modalStyles.form}>
@@ -116,7 +132,7 @@ const TabelaAnketa = () => {
         </tr>
         </thead>
         <tbody>
-        {surveys.map(survey => (
+        {filteredSurveys.map(survey => (
               <RedAnkete key={survey.id} survey={survey} navigate={navigate} />
             ))}
         </tbody>
@@ -130,10 +146,18 @@ const TabelaAnketa = () => {
 const styles = {
   container: {
     display: 'flex',
-    justifyContent: 'center',
+    flexDirection: 'column',
     alignItems: 'center',
-    height: '100vh',
+    justifyContent: 'flex-start',  
+    height: 'auto',
     background: 'linear-gradient(135deg, #e2dadb 25%, #dae2df 25%, #dae2df 50%, #a2a7a5 50%, #a2a7a5 75%, #6d696a 75%)',
+    padding: '20px 0'
+  },
+  controlsContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '80%',  
+    marginBottom: '20px',
   },
   tableContainer: {
     backgroundColor: '#ffffff',
@@ -162,6 +186,16 @@ const styles = {
   },
   closedStatus: {
     color: '#FFB6C1',  
+  },
+  searchContainer: {
+    margin: '20px',
+    textAlign: 'center',
+  },
+  searchInput: {
+    padding: '10px',
+    width: '300px',
+    borderRadius: '4px',
+    border: '1px solid #ddd',
   },
  
 };
