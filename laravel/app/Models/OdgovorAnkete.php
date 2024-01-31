@@ -11,7 +11,7 @@ class OdgovorAnkete extends Model
     protected $fillable = [
         'anketa_id',
         'korisnik_id',
-        'pitanje_id',
+        'pitanje_ankete_id',
         'odgovor',
     ];
     public function anketa()
@@ -25,7 +25,7 @@ class OdgovorAnkete extends Model
     }
     public function pitanje()
     {
-        return $this->belongsTo(PitanjeAnkete::class, 'pitanje_id');
+        return $this->belongsTo(PitanjeAnkete::class, 'pitanje_ankete_id');
     }
 
 }

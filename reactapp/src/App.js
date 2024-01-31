@@ -6,12 +6,14 @@ import TabelaAnketa from './komponente/ankete/admin/TabelaAnketa';
 import DetaljiAnkete from './komponente/ankete/detalji/DetaljiAnkete';
 import OpenFDAComponent from './komponente/fda/OpenFDAComponent';
 import TabelaAnketaKorisnik from './komponente/ankete/korisnik/TabelaAnketaKorisnik';
+import GlasajAnketa from './komponente/ankete/korisnik/GlasajAnketa';
 
 function App() {
   return (
    <BrowserRouter>
      
       <Routes>
+      <Route path='/ankete/glasaj/:id' element={<GlasajAnketa />}></Route>  
         <Route path='/ankete/:id' element={<DetaljiAnkete></DetaljiAnkete>}></Route>
         <Route path='/ankete' element={<TabelaAnketaKorisnik></TabelaAnketaKorisnik>}></Route>
         <Route path='/admin' element={<TabelaAnketa></TabelaAnketa>}></Route>

@@ -14,6 +14,8 @@ const Login = () => {
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/login', { email, password });
       sessionStorage.setItem('token', response.data.token);
+      sessionStorage.setItem('user_id', response.data.user.id);
+      sessionStorage.setItem('user_uloga', response.data.user.uloga);
       navigate('/ankete');
     } catch (error) {
       console.error('Login failed:', error);

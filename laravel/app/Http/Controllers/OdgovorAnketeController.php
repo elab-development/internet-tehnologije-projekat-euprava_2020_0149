@@ -25,7 +25,7 @@ class OdgovorAnketeController extends Controller
         $validator = Validator::make($request->all(), [
             'anketa_id' => 'required|integer',
             'korisnik_id' => 'required|integer',
-            'pitanje_id' => 'required|integer',
+            'pitanje_ankete_id' => 'required|integer',
             'odgovor' => 'required|string',
         ]);
 
@@ -44,7 +44,7 @@ class OdgovorAnketeController extends Controller
         $validator = Validator::make($request->all(), [
             'anketa_id' => 'required|integer',
             'korisnik_id' => 'required|integer',
-            'pitanje_id' => 'required|integer',
+            'pitanje_ankete_id' => 'required|integer',
             'odgovor' => 'required|string',
         ]);
 
