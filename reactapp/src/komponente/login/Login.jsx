@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import InputField from '../reusable/InputField';
   
 
-const Login = () => {
+const Login = ({setToken}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -16,6 +16,7 @@ const Login = () => {
       sessionStorage.setItem('token', response.data.token);
       sessionStorage.setItem('user_id', response.data.user.id);
       sessionStorage.setItem('user_uloga', response.data.user.uloga);
+      setToken(response.data.token)
       navigate('/ankete');
     } catch (error) {
       console.error('Login failed:', error);
