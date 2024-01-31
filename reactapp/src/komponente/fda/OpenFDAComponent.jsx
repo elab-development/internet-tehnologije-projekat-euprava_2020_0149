@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import FDAKartica from './FDAKartica';
 
 const OpenFDAComponent = () => {
   const [data, setData] = useState([]);
@@ -29,12 +30,13 @@ const OpenFDAComponent = () => {
       <h2>OpenFDA Food Recall Data</h2>
       <ul>
         {data.map((item, index) => (
-          <li key={index}>
-            
-            <p>Proizvod: {item.product_description}</p>
-            <p>Razlog opoziva: {item.reason_for_recall}</p>
-            <p>Datum objave: {item.report_date}</p>
-          </li>
+            <FDAKartica
+            key={index}
+            proizvod={item.product_description}
+            razlogOpoziva={item.reason_for_recall}
+            datumObjave={item.report_date}
+            product_description={item.product_description}
+        />
         ))}
       </ul>
     </div>
