@@ -14,7 +14,7 @@ const RedAnkete = ({ survey, navigate }) => {
         </span>
       </td>
       <td style={styles.td}>
-        <button onClick={() => navigate(`/anketa/${survey.id}`)}>Detalji</button>
+        <button onClick={() => navigate(`/ankete/${survey.id}`)}>Detalji</button>
       </td>
     </tr>
   );

@@ -20,7 +20,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         User::factory(10)->create();
+        //prepravljen seeder za potrebe react domaceg i seminarskog rada, kreirani useri sa razlicitim ulogama
+        User::factory(2)->create(['uloga' => 'admin']); 
+        User::factory(15)->create(['uloga' => 'korisnik']);
+        
 
          Zakazivanje::factory()->count(5)->create();
          $this->call(ZdravstveniKartonSeeder::class);
