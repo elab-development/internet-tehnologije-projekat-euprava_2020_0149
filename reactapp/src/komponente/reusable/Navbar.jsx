@@ -28,7 +28,7 @@ const Navbar = ({ token, setToken }) => {
 
       if (response.status === 200) {
        
-        localStorage.removeItem('token');
+        sessionStorage.clear();
         setToken(null);
 
         

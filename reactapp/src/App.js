@@ -11,11 +11,11 @@ import { useState } from 'react';
 import Navbar from './komponente/reusable/Navbar';
 
 function App() {
-  const [token,setToken] = useState();
+  const [token,setToken] = useState(null); 
   return (
    <BrowserRouter>
       <Navbar token={token}  setToken={setToken} ></Navbar>
-      <Routes>
+      <Routes> 
         
         <Route path='/ankete/glasaj/:id' element={<GlasajAnketa />}></Route>     {/* ulogovani korisnik */}
         <Route path='/ankete/:id' element={<DetaljiAnkete></DetaljiAnkete>}></Route>{/* ulogovani admin */}

@@ -47,29 +47,7 @@ const GlasajAnketa = () => {
         navigate('/ankete');
     }
   };
-
-  const handleSubmit = async () => {
-    const korisnikId = sessionStorage.getItem('user_id');  
-    const odgovori = []; 
-    userRatings.forEach((rating, index) => {
-      odgovori.push({
-        anketa_id: anketa.id,
-        korisnik_id: korisnikId,
-        pitanje_ankete_id: anketa.pitanja[index].id+"",
-        odgovor: rating,
-      });
-    });
-
-    try {
-      const response = await axios.post('http://127.0.0.1:8000/api/odgovori', odgovori);
-      if (response.status === 201) {
-        setSubmitted(true);
-      }
-    } catch (error) {
-      console.error('Error submitting answers:', error);
-    }
-  };
-
+ 
   if (!anketa) {
     return <div>Loading...</div>;
   }
@@ -102,7 +80,8 @@ const GlasajAnketa = () => {
           </div>
         </ul>
         {currentQuestionIndex === anketa.pitanja.length - 1 && (
-          <button onClick={handleSubmit}>Submit Ratings</button>
+            <p>Hvala!</p>
+
         )}
       </div>
     </div>

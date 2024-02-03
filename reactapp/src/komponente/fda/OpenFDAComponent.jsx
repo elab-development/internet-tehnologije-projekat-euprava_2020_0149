@@ -11,6 +11,7 @@ const OpenFDAComponent = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 5;
   const pageCount = Math.ceil(data.length / itemsPerPage);
+  
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
   };
@@ -20,7 +21,6 @@ const OpenFDAComponent = () => {
     
     const fetchData = async () => {
       try {
-        
         const result = await axios.get('https://api.fda.gov/food/enforcement.json?limit=50');
         setData(result.data.results);
       } catch (error) {

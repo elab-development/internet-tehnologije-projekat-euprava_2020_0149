@@ -15,9 +15,15 @@ const Login = ({setToken}) => {
       const response = await axios.post('http://127.0.0.1:8000/api/login', { email, password });
       sessionStorage.setItem('token', response.data.token);
       sessionStorage.setItem('user_id', response.data.user.id);
-      sessionStorage.setItem('user_uloga', response.data.user.uloga);
+      sessionStorage.setItem('user_uloga', response.data.user.role);
       setToken(response.data.token)
-      navigate('/ankete');
+      if(response.data.user.role=="admin"){
+       navigate('/admin');
+
+      }else{
+        navigate('/ankete');
+
+      }
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -27,7 +33,6 @@ const Login = ({setToken}) => {
     <div style={styles.container}>
       <form style={styles.form} onSubmit={handleSubmit}>
         <h2>Please Sign In</h2>
-     
         <InputField
           type="email"
           placeholder="email"
