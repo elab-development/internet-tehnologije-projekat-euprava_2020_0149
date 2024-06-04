@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const DetaljiAnkete = () => {
   const { id } = useParams();
@@ -23,6 +27,34 @@ const DetaljiAnkete = () => {
     return <div>Loading...</div>;
   }
 
+  const generateChartData = (pitanje) => {
+    const odgovorCount = {};
+
+    pitanje.odgovori.forEach((odgovor) => {
+      if (odgovorCount[odgovor.odgovor]) {
+        odgovorCount[odgovor.odgovor]++;
+      } else {
+        odgovorCount[odgovor.odgovor] = 1;
+      }
+    });
+
+    const labels = Object.keys(odgovorCount);
+    const data = Object.values(odgovorCount);
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'Broj Odgovora',
+          data,
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+        },
+      ],
+    };
+  };
+
   return (
     <div style={styles.container}>
       <div style={styles.detailsContainer}>
@@ -36,11 +68,7 @@ const DetaljiAnkete = () => {
           {anketa.pitanja.map((pitanje) => (
             <div key={pitanje.id}>
               <li>{pitanje.tekst}</li>
-              <ul>
-                {pitanje.odgovori.map((odgovor) => (
-                  <li key={odgovor.id}>{odgovor.odgovor}</li>
-                ))}
-              </ul>
+              <Bar data={generateChartData(pitanje)} />
             </div>
           ))}
         </ul>
