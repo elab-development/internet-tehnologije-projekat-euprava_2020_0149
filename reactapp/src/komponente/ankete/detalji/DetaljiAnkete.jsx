@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const DetaljiAnkete = () => {
   const { id } = useParams();
   const [anketa, setAnketa] = useState(null);
+  const chartRefs = useRef([]);
 
   useEffect(() => {
     const fetchAnketa = async () => {
@@ -55,6 +58,40 @@ const DetaljiAnkete = () => {
     };
   };
 
+  const generatePDF = async () => {
+    const pdf = new jsPDF('p', 'pt', 'a4');
+    pdf.setFontSize(12);
+    pdf.text(`Izveštaj za anketu: ${anketa.naslov}`, 40, 40);
+    pdf.text(`Opis: ${anketa.opis}`, 40, 60);
+    pdf.text(`Datum pocetka: ${anketa.datum_pocetka}`, 40, 80);
+    pdf.text(`Datum kraja: ${anketa.datum_kraja}`, 40, 100);
+    pdf.text(`Status: ${anketa.status}`, 40, 120);
+
+    let yOffset = 140;
+
+    for (let i = 0; i < anketa.pitanja.length; i++) {
+      const pitanje = anketa.pitanja[i];
+      const chartCanvas = chartRefs.current[i];
+      const canvas = await html2canvas(chartCanvas);
+      const imgData = canvas.toDataURL('image/png');
+
+      // Dodaj pitanje
+      pdf.text(pitanje.tekst, 40, yOffset);
+      yOffset += 20;
+
+      // Proveri da li ima dovoljno prostora za grafikon, ako ne dodaj novu stranicu
+      if (yOffset + 300 > pdf.internal.pageSize.height) {
+        pdf.addPage();
+        yOffset = 40;
+      }
+
+      pdf.addImage(imgData, 'PNG', 40, yOffset, 500, 300);
+      yOffset += 320; // Prostor za sledeće pitanje i grafikon
+    }
+
+    pdf.save('anketa_izvestaj.pdf');
+  };
+
   return (
     <div style={styles.container}>
       <div style={styles.detailsContainer}>
@@ -65,13 +102,16 @@ const DetaljiAnkete = () => {
         <p>Status: {anketa.status}</p>
         <h3>Pitanja:</h3>
         <ul>
-          {anketa.pitanja.map((pitanje) => (
+          {anketa.pitanja.map((pitanje, index) => (
             <div key={pitanje.id}>
               <li>{pitanje.tekst}</li>
-              <Bar data={generateChartData(pitanje)} />
+              <div ref={(el) => (chartRefs.current[index] = el)}>
+                <Bar data={generateChartData(pitanje)} />
+              </div>
             </div>
           ))}
         </ul>
+        <button onClick={generatePDF} style={styles.button}>Generate PDF</button>
       </div>
     </div>
   );
@@ -91,6 +131,15 @@ const styles = {
     padding: '20px',
     borderRadius: '5px',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  },
+  button: {
+    marginTop: '20px',
+    padding: '10px 20px',
+    backgroundColor: '#4CAF50',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
   },
 };
 

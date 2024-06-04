@@ -5,8 +5,8 @@ import InputField from '../reusable/InputField';
   
 
 const Login = ({setToken}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('dicki.mathew@example.net');
+  const [password, setPassword] = useState('password');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {

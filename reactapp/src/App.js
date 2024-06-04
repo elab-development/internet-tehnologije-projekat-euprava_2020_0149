@@ -19,7 +19,7 @@ function App() {
       <Routes> 
         
         <Route path='/ankete/glasaj/:id' element={<GlasajAnketa />}></Route>     {/* ulogovani korisnik */}
-        <Route path='/ankete/:id' element={<DetaljiAnkete></DetaljiAnkete>}></Route>{/* ulogovani admin */}
+        <Route path='/ankete/:id' element={<DetaljiAnkete></DetaljiAnkete>}></Route>{/* ulogovani admin */}  {/* dodati grafikoni */}
         <Route path='/ankete' element={<TabelaAnketaKorisnik></TabelaAnketaKorisnik>}></Route> {/* ulogovani korisnik */}
         <Route path='/admin' element={<TabelaAnketa></TabelaAnketa>}></Route>{/* ulogovani admin */}
         <Route path='/fda' element={<OpenFDAComponent></OpenFDAComponent>}></Route>   {/*svi */}
@@ -27,7 +27,7 @@ function App() {
 
 
 
-        <Route path='/register' element={<Register  ></Register>}></Route>
+        <Route path='/register' element={<Register  ></Register>}></Route> {/* dodato za seminarski */}
       </Routes>
      
       </BrowserRouter>
