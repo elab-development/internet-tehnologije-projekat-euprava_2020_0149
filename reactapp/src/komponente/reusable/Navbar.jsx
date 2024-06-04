@@ -42,7 +42,13 @@ const Navbar = ({ token, setToken }) => {
   return (
     <div style={styles.container}>
       <div style={styles.controlsContainer}>
-        <Link to="/">Home</Link>
+       
+        {!token && (<>
+           <Link to="/">Login</Link>
+           <Link to="/register">Register</Link>
+           
+           </>
+        )}
         {token && userRole === 'korisnik' && (
           <>
             <Link to="/ankete">Ankete</Link>

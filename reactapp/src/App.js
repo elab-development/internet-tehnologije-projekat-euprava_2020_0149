@@ -9,6 +9,7 @@ import TabelaAnketaKorisnik from './komponente/ankete/korisnik/TabelaAnketaKoris
 import GlasajAnketa from './komponente/ankete/korisnik/GlasajAnketa';
 import { useState } from 'react';
 import Navbar from './komponente/reusable/Navbar';
+import Register from './komponente/login/Register';
 
 function App() {
   const [token,setToken] = useState(null); 
@@ -24,6 +25,9 @@ function App() {
         <Route path='/fda' element={<OpenFDAComponent></OpenFDAComponent>}></Route>   {/*svi */}
         <Route path='/' element={<Login setToken={setToken}></Login>}></Route>{/*svi */}
 
+
+
+        <Route path='/register' element={<Register  ></Register>}></Route>
       </Routes>
      
       </BrowserRouter>
