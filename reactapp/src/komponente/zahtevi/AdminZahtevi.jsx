@@ -54,6 +54,24 @@ const AdminZahtevi = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    const token = sessionStorage.getItem('token');
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/zahtevi/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert('Zahtev uspešno obrisan');
+      // Update local state after delete
+      setZahtevi((prevState) =>
+        prevState.filter((zahtev) => zahtev.id !== id)
+      );
+    } catch (error) {
+      console.error('Failed to delete zahtev:', error);
+    }
+  };
+
   return (
     <div style={styles.container}>
       <h2>Admin - Uredi Zahteve</h2>
@@ -96,6 +114,9 @@ const AdminZahtevi = () => {
                 <button onClick={() => handleSave(zahtev.id)} style={styles.button}>
                   Sačuvaj
                 </button>
+                <button onClick={() => handleDelete(zahtev.id)} style={{ ...styles.button, backgroundColor: '#ff4d4d' }}>
+                  Obriši
+                </button>
               </td>
             </tr>
           ))}
@@ -134,6 +155,7 @@ const styles = {
     backgroundColor: '#a2a7a5',
     color: 'white',
     cursor: 'pointer',
+    marginRight: '5px',
   },
 };
 
