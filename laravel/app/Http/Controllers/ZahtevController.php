@@ -13,7 +13,12 @@ class ZahtevController extends Controller
         $zahtevi = Zahtev::where('korisnik_id', $userId)->get();
         return response()->json($zahtevi);
     }
-
+    public function indexAdmin()
+    {
+        $userId = auth()->id();
+        $zahtevi = Zahtev::where('korisnik_id', $userId)->get();
+        return response()->json($zahtevi);
+    }
     public function show($id)
     {
         $userId = auth()->id();
@@ -44,24 +49,19 @@ class ZahtevController extends Controller
 
     public function update(Request $request, $id)
     {
-        $userId = auth()->id();
-        $zahtev = Zahtev::where('id', $id)->where('korisnik_id', $userId)->firstOrFail();
-
+        $zahtev = Zahtev::findOrFail($id);
+    
         $validator = Validator::make($request->all(), [
-            'tip_zahteva' => 'required|string|max:255',
-            'opis' => 'required|string',
-            'status' => 'required|string|max:255',
-            'datum_podnosenja' => 'required|date',
-            'odgovor' => 'sometimes|string'
+            'status' => 'sometimes|string|max:255',
+            'odgovor' => 'sometimes|string',
         ]);
-
+    
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-
+    
         $validatedData = $validator->validated();
-        $validatedData['korisnik_id'] = auth()->id();
-
+    
         $zahtev->update($validatedData);
         return response()->json($zahtev);
     }

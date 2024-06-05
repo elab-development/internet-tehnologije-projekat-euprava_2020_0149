@@ -41,15 +41,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('user-profile', [AuthController::class, 'userProfile']);
     Route::resource('zahtevi', ZahtevController::class);
     Route::resource('zakazivanja', ZakazivanjeController::class);
-
-    Route::get('/admin', function () {
-        // Admin stranica
-        
-    })->middleware('role:admin'); // Samo admini mogu pristupiti
+    Route::get('adminZahtevi', [ZahtevController::class, 'indexAdmin']);
     
-    Route::get('/user', function () {
-        // Korisnička stranica
-    })->middleware('role:korisnik'); // Samo obični korisnici mogu pristupiti
+    Route::patch('zahtevi/{id}', [ZahtevController::class, 'update']);
+   
 });
 
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);

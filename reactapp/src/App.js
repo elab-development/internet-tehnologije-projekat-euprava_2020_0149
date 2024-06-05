@@ -11,6 +11,7 @@ import { useState } from 'react';
 import Navbar from './komponente/reusable/Navbar';
 import Register from './komponente/login/Register';
 import CreateZahtev from './komponente/zahtevi/CreateZahtev';
+import AdminZahtevi from './komponente/zahtevi/AdminZahtevi';
 
 function App() {
   const [token,setToken] = useState(null); 
@@ -27,6 +28,7 @@ function App() {
         <Route path='/' element={<Login setToken={setToken}></Login>}></Route>{/*svi */}
 
 
+        <Route path="/admin/zahtevi" element={<AdminZahtevi />} />
         <Route path="/kreirajZahtev" element={<CreateZahtev />} />
         <Route path='/register' element={<Register  ></Register>}></Route> {/* dodato za seminarski */}
       </Routes>
