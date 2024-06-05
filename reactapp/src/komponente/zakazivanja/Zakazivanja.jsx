@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import DataTable from 'react-data-table-component';
 
 const Zakazivanja = () => {
   // Inicijalni test podaci
@@ -54,6 +55,28 @@ const Zakazivanja = () => {
     }
   };
 
+  const columns = [
+    {
+      name: 'Datum i Vreme',
+      selector: row => row.datum_vreme,
+      sortable: true,
+    },
+    {
+      name: 'Tip Pregleda',
+      selector: row => row.tip_pregleda,
+      sortable: true,
+    },
+    {
+      name: 'Status',
+      selector: row => row.status,
+      sortable: true,
+    },
+    {
+      name: 'Napomena',
+      selector: row => row.napomena,
+    },
+  ];
+
   return (
     <div style={styles.container}>
       <h2>Kreiraj Zakazivanje</h2>
@@ -92,26 +115,13 @@ const Zakazivanja = () => {
         <button type="submit" style={styles.button}>Kreiraj</button>
       </form>
       <h2>Prethodna Zakazivanja</h2>
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th>Datum i Vreme</th>
-            <th>Tip Pregleda</th>
-            <th>Status</th>
-            <th>Napomena</th>
-          </tr>
-        </thead>
-        <tbody>
-          {zakazivanja.map((zakazivanje) => (
-            <tr key={zakazivanje.id}>
-              <td>{zakazivanje.datum_vreme}</td>
-              <td>{zakazivanje.tip_pregleda}</td>
-              <td>{zakazivanje.status}</td>
-              <td>{zakazivanje.napomena}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <DataTable
+        columns={columns}
+        data={zakazivanja}
+        pagination
+        highlightOnHover
+        striped
+      />
     </div>
   );
 };
@@ -147,20 +157,6 @@ const styles = {
     backgroundColor: '#a2a7a5',
     color: 'white',
     cursor: 'pointer',
-  },
-  table: {
-    width: '80%',
-    borderCollapse: 'collapse',
-    marginTop: '20px',
-  },
-  th: {
-    border: '1px solid #ddd',
-    padding: '8px',
-    backgroundColor: '#f2f2f2',
-  },
-  td: {
-    border: '1px solid #ddd',
-    padding: '8px',
   },
 };
 
