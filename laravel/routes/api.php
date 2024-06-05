@@ -25,8 +25,8 @@ Route::get('/ankete/{id}/pitanjaodgovori', [AnketaController::class, 'getAnketaW
 Route::get('/zakazivanja/search', [ZakazivanjeController::class, 'search']);  /// GET http://127.0.0.1:8000/api/zakazivanja/search?korisnik_id=1&status=zakazano
 
 
-Route::resource('zahtevi', ZahtevController::class);
-Route::resource('zakazivanja', ZakazivanjeController::class);
+
+
 Route::resource('pitanja', PitanjeAnketeController::class);
 Route::resource('odgovori', OdgovorAnketeController::class);
 Route::resource('ankete', AnketaController::class);
@@ -39,7 +39,9 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::middleware(['auth:sanctum'])->group(function () {
     // Dodajte ovu rutu za dobijanje podataka o ulogovanom korisniku
     Route::get('user-profile', [AuthController::class, 'userProfile']);
-    
+    Route::resource('zahtevi', ZahtevController::class);
+    Route::resource('zakazivanja', ZakazivanjeController::class);
+
     Route::get('/admin', function () {
         // Admin stranica
         

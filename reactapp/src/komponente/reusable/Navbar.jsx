@@ -51,6 +51,7 @@ const Navbar = ({ token, setToken }) => {
         )}
         {token && userRole === 'korisnik' && (
           <>
+           <Link to="/kreirajZahtev">Kreiraj zahtev</Link>
             <Link to="/ankete">Ankete</Link>
           </>
         )}

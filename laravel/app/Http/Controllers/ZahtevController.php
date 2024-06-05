@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Zahtev;
@@ -10,41 +9,45 @@ class ZahtevController extends Controller
 {
     public function index()
     {
-        $zahtevi = Zahtev::all();
+        $userId = auth()->id();
+        $zahtevi = Zahtev::where('korisnik_id', $userId)->get();
         return response()->json($zahtevi);
     }
 
     public function show($id)
     {
-        $zahtev = Zahtev::findOrFail($id);
+        $userId = auth()->id();
+        $zahtev = Zahtev::where('id', $id)->where('korisnik_id', $userId)->firstOrFail();
         return response()->json($zahtev);
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'korisnik_id' => 'required|integer',
             'tip_zahteva' => 'required|string|max:255',
-            'opis' => 'required|string',
-            'status' => 'required|string|max:255',
+            'opis' => 'required|string', 
             'datum_podnosenja' => 'required|date',
-            'odgovor' => 'sometimes|string'
+            
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
 
-        $zahtev = Zahtev::create($validator->validated());
+        $validatedData = $validator->validated();
+        $validatedData['korisnik_id'] = auth()->id();
+        $validatedData['status'] ="podnet";
+
+        $zahtev = Zahtev::create($validatedData);
         return response()->json($zahtev, 201);
     }
 
     public function update(Request $request, $id)
     {
-        $zahtev = Zahtev::findOrFail($id);
+        $userId = auth()->id();
+        $zahtev = Zahtev::where('id', $id)->where('korisnik_id', $userId)->firstOrFail();
 
         $validator = Validator::make($request->all(), [
-            'korisnik_id' => 'required|integer',
             'tip_zahteva' => 'required|string|max:255',
             'opis' => 'required|string',
             'status' => 'required|string|max:255',
@@ -56,13 +59,17 @@ class ZahtevController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $zahtev->update($validator->validated());
+        $validatedData = $validator->validated();
+        $validatedData['korisnik_id'] = auth()->id();
+
+        $zahtev->update($validatedData);
         return response()->json($zahtev);
     }
 
     public function destroy($id)
     {
-        $zahtev = Zahtev::findOrFail($id);
+        $userId = auth()->id();
+        $zahtev = Zahtev::where('id', $id)->where('korisnik_id', $userId)->firstOrFail();
         $zahtev->delete();
         return response()->json(null, 204);
     }
