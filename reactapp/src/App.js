@@ -7,7 +7,7 @@ import DetaljiAnkete from './komponente/ankete/detalji/DetaljiAnkete';
 import OpenFDAComponent from './komponente/fda/OpenFDAComponent';
 import TabelaAnketaKorisnik from './komponente/ankete/korisnik/TabelaAnketaKorisnik';
 import GlasajAnketa from './komponente/ankete/korisnik/GlasajAnketa';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './komponente/reusable/Navbar';
 import Register from './komponente/login/Register';
 import CreateZahtev from './komponente/zahtevi/CreateZahtev';
@@ -16,6 +16,12 @@ import Zakazivanja from './komponente/zakazivanja/Zakazivanja';
 
 function App() {
   const [token,setToken] = useState(null); 
+  useEffect(() => {
+    const storedToken = sessionStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
   return (
    <BrowserRouter>
       <Navbar token={token}  setToken={setToken} ></Navbar>

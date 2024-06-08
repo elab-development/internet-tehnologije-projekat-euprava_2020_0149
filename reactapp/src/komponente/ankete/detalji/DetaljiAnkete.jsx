@@ -32,7 +32,12 @@ const DetaljiAnkete = () => {
 
   const generateChartData = (pitanje) => {
     const odgovorCount = {};
-
+      //
+      //odgovorCount{
+        //"DA":16,
+        //NE: 10,
+        //NZM:7
+      //}
     pitanje.odgovori.forEach((odgovor) => {
       if (odgovorCount[odgovor.odgovor]) {
         odgovorCount[odgovor.odgovor]++;
@@ -119,12 +124,13 @@ const DetaljiAnkete = () => {
 
 const styles = {
   container: {
-    display: 'flex',
+    marginLeft:"20%",
+    marginRight:"20%",
+
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
-    background:
-      'linear-gradient(135deg, #e2dadb 25%, #dae2df 25%, #dae2df 50%, #a2a7a5 50%, #a2a7a5 75%, #6d696a 75%)',
+    
   },
   detailsContainer: {
     backgroundColor: '#ffffff',

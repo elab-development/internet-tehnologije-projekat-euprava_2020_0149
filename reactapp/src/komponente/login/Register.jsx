@@ -6,7 +6,7 @@ import InputField from '../reusable/InputField';
 const Register = ({ setToken }) => {
   const [formData, setFormData] = useState({
     imePrezime: 'Test User',
-    email: 'testuser@example.com',
+    email: 'testuseraaaa@example.com',
     password: 'password',
     confirmPassword: 'password',
     datum_rodjenja: '1990-01-01',

@@ -59,7 +59,9 @@ const Navbar = ({ token, setToken }) => {
         {token && userRole === 'admin' && (
           <>
             <Link to="/admin">Admin</Link>
+            <Link to="/admin/zahtevi">Zahtevi</Link>
           </>
+          
         )}
         <Link to="/fda">FDA</Link>
         {token && (

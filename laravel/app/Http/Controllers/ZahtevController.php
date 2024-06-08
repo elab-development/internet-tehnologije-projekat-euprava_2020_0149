@@ -15,8 +15,8 @@ class ZahtevController extends Controller
     }
     public function indexAdmin()
     {
-        $userId = auth()->id();
-        $zahtevi = Zahtev::where('korisnik_id', $userId)->get();
+        
+        $zahtevi = Zahtev::all();
         return response()->json($zahtevi);
     }
     public function show($id)
@@ -67,9 +67,8 @@ class ZahtevController extends Controller
     }
 
     public function destroy($id)
-    {
-        $userId = auth()->id();
-        $zahtev = Zahtev::where('id', $id)->where('korisnik_id', $userId)->firstOrFail();
+    { 
+        $zahtev = Zahtev::where('id', $id)->firstOrFail();
         $zahtev->delete();
         return response()->json(null, 204);
     }

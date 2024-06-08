@@ -102,7 +102,8 @@ const AdminZahtevi = () => {
                   <option value="u obradi">U obradi</option>
                   <option value="završen">Završen</option>
                 </select>
-              </td>
+              </td> 
+              <td>{zahtev.datum_podnosenja}</td> 
               <td>
                 <input
                   type="text"
