@@ -6,7 +6,7 @@ import InputField from '../reusable/InputField';
 const Register = ({ setToken }) => {
   const [formData, setFormData] = useState({
     imePrezime: 'Test User',
-    email: 'testuseraaaa@example.com',
+    email: 'testuser234@example.com',
     password: 'password',
     confirmPassword: 'password',
     datum_rodjenja: '1990-01-01',
@@ -15,10 +15,10 @@ const Register = ({ setToken }) => {
     grad: 'Test City',
     drzava: 'Test Country',
     telefon: '1234567890',
-    JMBG: '1234567890123',
-    broj_licne_karte: 'A123456',
+    JMBG: '1231111890123',
+    broj_licne_karte: 'A1211456',
     status: 'aktivan',
-    uloga: 'korisnik',
+    role: 'korisnik',
   });
 
   const navigate = useNavigate();
@@ -35,9 +35,7 @@ const Register = ({ setToken }) => {
     event.preventDefault();
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/register', formData);
-      
-        navigate('/');
- 
+      navigate('/');
     } catch (error) {
       alert('Registration failed:', error);
     }

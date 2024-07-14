@@ -26,7 +26,7 @@ class UserFactory extends Factory
             'JMBG' => $this->faker->unique()->numerify('##############'), // 13 cifara
             'broj_licne_karte' => $this->faker->unique()->numerify('########'), // 8 cifara
             'status' => $this->faker->randomElement(['Aktivan', 'Neaktivan']),
-            'uloga' =>  'korisnik',
+            'role' =>  'korisnik',
             'slika_profila' => 'default.jpg',  
             'poslednje_prijavljivanje' => now(),
         ];

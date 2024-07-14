@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //prepravljen seeder za potrebe react domaceg i seminarskog rada, kreirani useri sa razlicitim ulogama
-        User::factory(2)->create(['uloga' => 'admin']); 
-        User::factory(15)->create(['uloga' => 'korisnik']);
+        User::factory(2)->create(['role' => 'admin']); 
+        User::factory(15)->create(['role' => 'korisnik']);
         
 
          Zakazivanje::factory()->count(5)->create();

@@ -30,7 +30,7 @@ class AuthController extends Controller
             'JMBG' => 'required|string|max:255|unique:users,JMBG',
             'broj_licne_karte' => 'required|string|max:255|unique:users,broj_licne_karte',
             'status' => 'required|string|max:255',
-            'uloga' => 'required|string|max:255',
+            'role' => 'required|string|max:255',
             'slika_profila' => 'nullable|image|max:2048',
             
         ]);
@@ -55,7 +55,7 @@ class AuthController extends Controller
             'JMBG' => $request->input('JMBG'),
             'broj_licne_karte' => $request->input('broj_licne_karte'),
             'status' => $request->input('status'),
-            'uloga' => $request->input('uloga'),
+            'role' => $request->input('role'),
             'slika_profila' => $pathSlike,
            
         ]);
